@@ -1,0 +1,75 @@
+.tile,
+.tile::before,
+.tile::after {
+  width: 100%;
+  height: 100%;
+}
+
+.tile {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  color: white;
+  text-transform: uppercase;
+  transition: transform 400ms;
+}
+
+.tile::before,
+.tile::after {
+  position: absolute;
+  border: 2px solid transparent;
+  display: grid;
+  place-content: center;
+  content: attr(data-content);
+  backface-visibility: hidden;
+}
+
+.tile:not(.none) {
+  transform: rotateX(-180deg);
+}
+
+/* Front side (before flipping over) */
+.tile::before {
+  transform: rotateX(0deg);
+  border-color: #52525b;
+}
+
+/* Back side (after flipping over) */
+.tile::after {
+  transform: rotateX(-180deg);
+}
+
+.tile.correct::after {
+  background-color: #16a34a;
+}
+
+.tile.present::after {
+  background-color: #facc15;
+}
+
+.tile.not_present::after {
+  background-color: #52525b;
+}
+
+@keyframes horizontal-shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.tile.shake::before,
+.tile.shake::after {
+  animation: horizontal-shake 0.15s infinite;
+}
