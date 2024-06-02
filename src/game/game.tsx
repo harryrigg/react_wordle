@@ -11,11 +11,11 @@ import "./style.css";
 
 export const rowFlipDuration = 1500;
 
-export type TileState = "correct" | "present" | "not_present";
+export type TileState = "none" | "correct" | "present" | "not_present";
 
 type TileProps = {
   char: string;
-  status: string;
+  state: TileState;
   index: number;
   shake: boolean;
 };
@@ -27,7 +27,7 @@ function Tile(props: TileProps) {
 
   return (
     <div
-      className={`tile ${props.status} ${props.shake && "shake"}`}
+      className={`tile ${props.state} ${props.shake && "shake"}`}
       data-content={props.char}
       style={style}
     ></div>
@@ -50,7 +50,7 @@ export default function Game({
           .map(() => ""),
       ),
   );
-  const [statusRows, setStatusRows] = useState(
+  const [stateRows, setStateRows] = useState<Array<Array<TileState>>>(
     Array(6)
       .fill(undefined)
       .map(() =>
@@ -129,8 +129,8 @@ export default function Game({
     });
 
     // Find all present matches
-    const presentPass = correctPass.map((status, i) => {
-      if (status == "none") {
+    const presentPass = correctPass.map((state, i) => {
+      if (state == "none") {
         const c = charRows[rowIndex][i];
         const index = answerRemaining.indexOf(c);
         if (index !== -1) {
@@ -140,24 +140,24 @@ export default function Game({
           return "present";
         }
       }
-      return status;
+      return state;
     });
 
     // Mark all remaining characters as not present
-    const finalPass = presentPass.map((status, i) => {
-      if (status == "none") {
+    const finalPass = presentPass.map((state, i) => {
+      if (state == "none") {
         const c = charRows[rowIndex][i];
         if (!nextKeymap.has(c)) {
           nextKeymap.set(c, "not_present");
         }
         return "not_present";
       } else {
-        return status;
+        return state;
       }
     });
 
     // Update state
-    setStatusRows((rows) =>
+    setStateRows((rows) =>
       rows.map((r, i) => {
         if (i == rowIndex) {
           return finalPass;
@@ -240,7 +240,7 @@ export default function Game({
             row.map((char, j) => (
               <Tile
                 char={char}
-                status={statusRows[i][j]}
+                state={stateRows[i][j]}
                 shake={i == rowIndex && shake}
                 index={j}
                 key={j}

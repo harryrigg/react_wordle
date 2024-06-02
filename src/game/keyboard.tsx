@@ -51,7 +51,7 @@ export default function Keyboard(props: KeyboardProps) {
         return "bg-yellow-400";
       case "not_present":
         return "bg-zinc-600";
-      case undefined:
+      default:
         return "bg-zinc-400";
     }
   }
