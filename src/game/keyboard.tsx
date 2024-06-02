@@ -15,7 +15,7 @@ function Key(props: KeyProps) {
   } as React.CSSProperties;
   return (
     <button
-      className={`rounded h-16 transition-colors duration-200 ${props.className}`}
+      className={`rounded h-16 transition-colors duration-200 font-extrabold ${props.className}`}
       style={style}
       onClick={props.onClick}
     >
@@ -48,11 +48,11 @@ export default function Keyboard(props: KeyboardProps) {
       case "correct":
         return "bg-green-600";
       case "present":
-        return "bg-yellow-400";
+        return "bg-yellow-500";
       case "not_present":
         return "bg-zinc-600";
       default:
-        return "bg-zinc-400";
+        return "bg-gray-400";
     }
   }
 
@@ -83,7 +83,7 @@ export default function Keyboard(props: KeyboardProps) {
       <div className="flex mx-auto gap-1 w-full">
         <Key
           k="ENTER"
-          className="flex-[1.5] bg-zinc-400 text-xs"
+          className="flex-[1.5] bg-gray-400 text-xs"
           onClick={() => onKey("Enter")}
         />
         {keys[2].map((k) => (
@@ -96,7 +96,7 @@ export default function Keyboard(props: KeyboardProps) {
         ))}
         <Key
           k="BACK"
-          className="flex-[1.5] bg-zinc-400 text-xs"
+          className="flex-[1.5] bg-gray-400 text-xs"
           onClick={() => onKey("Backspace")}
         />
       </div>

@@ -12,6 +12,8 @@
   color: white;
   text-transform: uppercase;
   transition: transform 400ms;
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 .tile::before,
@@ -44,7 +46,7 @@
 }
 
 .tile.present::after {
-  background-color: #facc15;
+  background-color: #eab308;
 }
 
 .tile.not_present::after {
