@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { TileState, rowFlipDuration } from "./game";
 
-const keys = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"].map((s) => s.split(""));
+const keys = ["qwertyuiop", "asdfghjkl", "zxcvbnm"].map((s) => s.split(""));
 
 type KeyProps = {
   k: string;
@@ -15,7 +15,7 @@ function Key(props: KeyProps) {
   } as React.CSSProperties;
   return (
     <button
-      className={`rounded h-16 transition-colors duration-200 font-extrabold ${props.className}`}
+      className={`rounded h-16 uppercase transition-colors duration-200 font-extrabold ${props.className}`}
       style={style}
       onClick={props.onClick}
     >

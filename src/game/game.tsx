@@ -76,7 +76,7 @@ export default function Game({
       setCharRows((rows) =>
         rows.map((r, i) => {
           if (i == rowIndex) {
-            r[colIndex] = letter.toUpperCase();
+            r[colIndex] = letter;
           }
           return r;
         }),
@@ -101,7 +101,6 @@ export default function Game({
 
   function confirmWord() {
     if (colIndex != 5) {
-      console.log("set shake");
       startShake();
       showToast("Not a complete word");
       return;
