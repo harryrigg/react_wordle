@@ -1,15 +1,13 @@
-"use client";
-
 import { useState } from "react";
 import Game from "./game/game";
 import { getWord } from "./dictionary";
 
 export default function Home() {
-  const [gameKey, setGameKey] = useState(crypto.randomUUID());
+  const [gameKey, setGameKey] = useState(Date.now());
   const [answer, setAnswer] = useState(getWord());
 
   function handleReload() {
-    setGameKey(crypto.randomUUID());
+    setGameKey(Date.now());
     setAnswer(getWord());
   }
 
